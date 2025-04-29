@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -17,11 +18,12 @@
                 <h2>Polar Analytics</h2>
             </div>
             <ul class="nav-links">
-                <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="active"><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                 <li><a href="#team"><i class="fas fa-users"></i> Team Overview</a></li>
                 <li><a href="#individual"><i class="fas fa-user"></i> Individual Analysis</a></li>
                 <li><a href="#trends"><i class="fas fa-chart-line"></i> Trends</a></li>
                 <li><a href="#alerts"><i class="fas fa-bell"></i> Alerts</a></li>
+                <li><a href="groups.html"><i class="fas fa-layer-group"></i> Groups</a></li>
                 <li><a href="#reports"><i class="fas fa-file-alt"></i> Reports</a></li>
                 <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
@@ -35,7 +37,7 @@
             <header>
                 <div class="header-left">
                     <h1>Dashboard</h1>
-                    <p>Welcome back, Admin</p>
+                    <p>Welcome back, John! Here's your health analytics overview.</p>
                 </div>
                 <div class="header-right">
                     <div class="date-picker">
@@ -49,92 +51,146 @@
                 </div>
             </header>
 
-            <!-- Dashboard Overview Section -->
-            <section class="dashboard-overview">
-                <div class="overview-card">
+            <!-- Team Selection -->
+            <div class="team-selection">
+                <label for="teamSelect">Select Team:</label>
+                <select id="teamSelect">
+                    <option value="all">All Teams</option>
+                    <option value="mining">Mining Crew</option>
+                    <option value="logistics">Logistics</option>
+                    <option value="operations">Operations</option>
+                </select>
+            </div>
+
+            <!-- Summary Cards -->
+            <section class="summary-cards">
+                <div class="card">
                     <div class="card-icon blue">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-heart-pulse"></i>
                     </div>
-                    <div class="card-info">
-                        <h3>Total Employees</h3>
-                        <p class="card-value">248</p>
-                        <p class="card-trend positive"><i class="fas fa-arrow-up"></i> 12 new this month</p>
+                    <div class="card-content">
+                        <h3>Average Recovery</h3>
+                        <p class="card-value">74%</p>
+                        <p class="card-trend positive"><i class="fas fa-arrow-up"></i> 3% from last week</p>
                     </div>
                 </div>
-                <div class="overview-card">
+                <div class="card">
                     <div class="card-icon green">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="card-info">
-                        <h3>Avg Recovery Score</h3>
-                        <p class="card-value">78%</p>
-                        <p class="card-trend positive"><i class="fas fa-arrow-up"></i> 5% increase</p>
-                    </div>
-                </div>
-                <div class="overview-card">
-                    <div class="card-icon orange">
                         <i class="fas fa-bed"></i>
                     </div>
-                    <div class="card-info">
-                        <h3>Avg Sleep Quality</h3>
-                        <p class="card-value">6.8 hrs</p>
-                        <p class="card-trend negative"><i class="fas fa-arrow-down"></i> 0.3 hrs decrease</p>
+                    <div class="card-content">
+                        <h3>Sleep Quality</h3>
+                        <p class="card-value">Good</p>
+                        <p class="card-trend neutral"><i class="fas fa-minus"></i> No change</p>
                     </div>
                 </div>
-                <div class="overview-card">
-                    <div class="card-icon red">
-                        <i class="fas fa-exclamation-triangle"></i>
+                <div class="card">
+                    <div class="card-icon orange">
+                        <i class="fas fa-person-walking"></i>
                     </div>
-                    <div class="card-info">
+                    <div class="card-content">
+                        <h3>Activity Level</h3>
+                        <p class="card-value">Moderate</p>
+                        <p class="card-trend positive"><i class="fas fa-arrow-up"></i> 5% from last week</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon red">
+                        <i class="fas fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="card-content">
                         <h3>Health Alerts</h3>
-                        <p class="card-value">12</p>
-                        <p class="card-trend negative"><i class="fas fa-arrow-up"></i> 3 new alerts</p>
+                        <p class="card-value">3</p>
+                        <p class="card-trend negative"><i class="fas fa-arrow-up"></i> 2 new alerts</p>
                     </div>
                 </div>
             </section>
 
             <!-- Charts Section -->
-            <section class="charts-container">
-                <div class="chart-card large">
+            <section class="charts-section">
+                <div class="chart-container large">
                     <div class="chart-header">
-                        <h3>Team Recovery Trends</h3>
+                        <h3>Recovery Trend by Department</h3>
                         <div class="chart-actions">
-                            <select id="teamSelect">
-                                <option value="all">All Teams</option>
-                                <option value="mining">Mining Crew</option>
-                                <option value="logistics">Logistics</option>
-                                <option value="operations">Operations</option>
-                            </select>
+                            <button class="btn-icon"><i class="fas fa-download"></i></button>
                             <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
                         </div>
                     </div>
-                    <div class="chart-body" id="recoveryTrendChart">
-                        <!-- Chart will be rendered here by JavaScript -->
+                    <div class="chart-body">
                         <canvas id="recoveryChart"></canvas>
                     </div>
                 </div>
-                <div class="chart-card">
+                <div class="chart-container">
                     <div class="chart-header">
                         <h3>Sleep Quality Distribution</h3>
                         <div class="chart-actions">
+                            <button class="btn-icon"><i class="fas fa-download"></i></button>
                             <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
                         </div>
                     </div>
-                    <div class="chart-body" id="sleepDistributionChart">
-                        <!-- Chart will be rendered here by JavaScript -->
+                    <div class="chart-body">
                         <canvas id="sleepChart"></canvas>
                     </div>
                 </div>
-                <div class="chart-card">
+                <div class="chart-container">
                     <div class="chart-header">
                         <h3>Activity vs Recovery</h3>
                         <div class="chart-actions">
+                            <button class="btn-icon"><i class="fas fa-download"></i></button>
                             <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
                         </div>
                     </div>
-                    <div class="chart-body" id="activityRecoveryChart">
-                        <!-- Chart will be rendered here by JavaScript -->
+                    <div class="chart-body">
                         <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Insights Section -->
+            <section class="insights-section">
+                <div class="section-header">
+                    <h3>Key Insights</h3>
+                    <button class="btn small">View All</button>
+                </div>
+                <div class="insights-container">
+                    <div class="insight-card">
+                        <div class="insight-icon warning">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>High Fatigue Detected</h4>
+                            <p>5 employees in Mining Crew showing signs of accumulated fatigue.</p>
+                            <div class="insight-actions">
+                                <button class="btn small">View Details</button>
+                                <button class="btn small outline">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon success">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Recovery Improvement</h4>
+                            <p>Logistics team showing 12% improvement in recovery scores after schedule adjustment.</p>
+                            <div class="insight-actions">
+                                <button class="btn small">View Details</button>
+                                <button class="btn small outline">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon info">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Sleep Pattern Recommendation</h4>
+                            <p>Adjusting shift start times by 30 minutes could improve sleep quality for night shift workers.</p>
+                            <div class="insight-actions">
+                                <button class="btn small">View Details</button>
+                                <button class="btn small outline">Dismiss</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -142,8 +198,8 @@
             <!-- At-Risk Employees Section -->
             <section class="at-risk-section">
                 <div class="section-header">
-                    <h2>Employees Requiring Attention</h2>
-                    <button class="btn primary">View All</button>
+                    <h3>Employees Needing Attention</h3>
+                    <button class="btn small">View All</button>
                 </div>
                 <div class="table-container">
                     <table class="data-table">
@@ -153,96 +209,57 @@
                                 <th>Department</th>
                                 <th>Recovery Score</th>
                                 <th>Sleep Quality</th>
-                                <th>Heart Rate Var.</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Risk Level</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="employee-cell">
                                     <img src="https://via.placeholder.com/32" alt="Employee">
-                                    <span>Michael Johnson</span>
+                                    <span>Robert Smith</span>
                                 </td>
-                                <td>Mining Operations</td>
-                                <td><span class="badge red">42%</span></td>
-                                <td>4.2 hrs</td>
-                                <td>Low (18ms)</td>
-                                <td><span class="status-pill red">Critical</span></td>
-                                <td><button class="btn small">Contact</button></td>
+                                <td>Mining Crew</td>
+                                <td><span class="status-pill red">48%</span></td>
+                                <td><span class="status-pill red">Poor</span></td>
+                                <td><span class="status-pill red">High</span></td>
+                                <td>
+                                    <button class="btn small">Contact</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="employee-cell">
                                     <img src="https://via.placeholder.com/32" alt="Employee">
-                                    <span>Sarah Williams</span>
+                                    <span>Jennifer Lee</span>
+                                </td>
+                                <td>Operations</td>
+                                <td><span class="status-pill orange">62%</span></td>
+                                <td><span class="status-pill orange">Fair</span></td>
+                                <td><span class="status-pill orange">Medium</span></td>
+                                <td>
+                                    <button class="btn small">Contact</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="employee-cell">
+                                    <img src="https://via.placeholder.com/32" alt="Employee">
+                                    <span>Carlos Rodriguez</span>
                                 </td>
                                 <td>Logistics</td>
-                                <td><span class="badge orange">58%</span></td>
-                                <td>5.1 hrs</td>
-                                <td>Below Avg (24ms)</td>
-                                <td><span class="status-pill orange">Warning</span></td>
-                                <td><button class="btn small">Contact</button></td>
-                            </tr>
-                            <tr>
-                                <td class="employee-cell">
-                                    <img src="https://via.placeholder.com/32" alt="Employee">
-                                    <span>David Chen</span>
+                                <td><span class="status-pill orange">65%</span></td>
+                                <td><span class="status-pill orange">Fair</span></td>
+                                <td><span class="status-pill orange">Medium</span></td>
+                                <td>
+                                    <button class="btn small">Contact</button>
                                 </td>
-                                <td>Heavy Equipment</td>
-                                <td><span class="badge orange">61%</span></td>
-                                <td>5.8 hrs</td>
-                                <td>Below Avg (26ms)</td>
-                                <td><span class="status-pill orange">Warning</span></td>
-                                <td><button class="btn small">Contact</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
-
-            <!-- Insights Section -->
-            <section class="insights-section">
-                <div class="section-header">
-                    <h2>AI-Generated Insights</h2>
-                    <span class="refresh-text"><i class="fas fa-sync"></i> Updated 2 hours ago</span>
-                </div>
-                <div class="insights-container">
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="insight-content">
-                            <h4>Sleep Pattern Correlation</h4>
-                            <p>Mining team members working night shifts show 23% lower recovery scores. Consider adjusting rotation schedules.</p>
-                        </div>
-                        <button class="btn-icon"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="insight-content">
-                            <h4>Temperature Impact</h4>
-                            <p>Employees working in high-temperature environments show elevated heart rates and decreased HRV. Consider additional cooling breaks.</p>
-                        </div>
-                        <button class="btn-icon"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="insight-content">
-                            <h4>Stress Prediction</h4>
-                            <p>Algorithm predicts 8 employees may experience high stress levels next week based on declining recovery patterns.</p>
-                        </div>
-                        <button class="btn-icon"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </section>
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
