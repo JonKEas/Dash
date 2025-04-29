@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar Health Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="Polar Analytics Logo">
+                <h2>Polar Analytics</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#team"><i class="fas fa-users"></i> Team Overview</a></li>
+                <li><a href="#individual"><i class="fas fa-user"></i> Individual Analysis</a></li>
+                <li><a href="#trends"><i class="fas fa-chart-line"></i> Trends</a></li>
+                <li><a href="#alerts"><i class="fas fa-bell"></i> Alerts</a></li>
+                <li><a href="#reports"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <p>Powered by Polar</p>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header>
+                <div class="header-left">
+                    <h1>Dashboard</h1>
+                    <p>Welcome back, Admin</p>
+                </div>
+                <div class="header-right">
+                    <div class="date-picker">
+                        <i class="fas fa-calendar"></i>
+                        <span>Apr 29, 2025</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User Profile">
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Overview Section -->
+            <section class="dashboard-overview">
+                <div class="overview-card">
+                    <div class="card-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Total Employees</h3>
+                        <p class="card-value">248</p>
+                        <p class="card-trend positive"><i class="fas fa-arrow-up"></i> 12 new this month</p>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon green">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Avg Recovery Score</h3>
+                        <p class="card-value">78%</p>
+                        <p class="card-trend positive"><i class="fas fa-arrow-up"></i> 5% increase</p>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon orange">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Avg Sleep Quality</h3>
+                        <p class="card-value">6.8 hrs</p>
+                        <p class="card-trend negative"><i class="fas fa-arrow-down"></i> 0.3 hrs decrease</p>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon red">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>Health Alerts</h3>
+                        <p class="card-value">12</p>
+                        <p class="card-trend negative"><i class="fas fa-arrow-up"></i> 3 new alerts</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-container">
+                <div class="chart-card large">
+                    <div class="chart-header">
+                        <h3>Team Recovery Trends</h3>
+                        <div class="chart-actions">
+                            <select id="teamSelect">
+                                <option value="all">All Teams</option>
+                                <option value="mining">Mining Crew</option>
+                                <option value="logistics">Logistics</option>
+                                <option value="operations">Operations</option>
+                            </select>
+                            <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-body" id="recoveryTrendChart">
+                        <!-- Chart will be rendered here by JavaScript -->
+                        <canvas id="recoveryChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Sleep Quality Distribution</h3>
+                        <div class="chart-actions">
+                            <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-body" id="sleepDistributionChart">
+                        <!-- Chart will be rendered here by JavaScript -->
+                        <canvas id="sleepChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Activity vs Recovery</h3>
+                        <div class="chart-actions">
+                            <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-body" id="activityRecoveryChart">
+                        <!-- Chart will be rendered here by JavaScript -->
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- At-Risk Employees Section -->
+            <section class="at-risk-section">
+                <div class="section-header">
+                    <h2>Employees Requiring Attention</h2>
+                    <button class="btn primary">View All</button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Department</th>
+                                <th>Recovery Score</th>
+                                <th>Sleep Quality</th>
+                                <th>Heart Rate Var.</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="employee-cell">
+                                    <img src="https://via.placeholder.com/32" alt="Employee">
+                                    <span>Michael Johnson</span>
+                                </td>
+                                <td>Mining Operations</td>
+                                <td><span class="badge red">42%</span></td>
+                                <td>4.2 hrs</td>
+                                <td>Low (18ms)</td>
+                                <td><span class="status-pill red">Critical</span></td>
+                                <td><button class="btn small">Contact</button></td>
+                            </tr>
+                            <tr>
+                                <td class="employee-cell">
+                                    <img src="https://via.placeholder.com/32" alt="Employee">
+                                    <span>Sarah Williams</span>
+                                </td>
+                                <td>Logistics</td>
+                                <td><span class="badge orange">58%</span></td>
+                                <td>5.1 hrs</td>
+                                <td>Below Avg (24ms)</td>
+                                <td><span class="status-pill orange">Warning</span></td>
+                                <td><button class="btn small">Contact</button></td>
+                            </tr>
+                            <tr>
+                                <td class="employee-cell">
+                                    <img src="https://via.placeholder.com/32" alt="Employee">
+                                    <span>David Chen</span>
+                                </td>
+                                <td>Heavy Equipment</td>
+                                <td><span class="badge orange">61%</span></td>
+                                <td>5.8 hrs</td>
+                                <td>Below Avg (26ms)</td>
+                                <td><span class="status-pill orange">Warning</span></td>
+                                <td><button class="btn small">Contact</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Insights Section -->
+            <section class="insights-section">
+                <div class="section-header">
+                    <h2>AI-Generated Insights</h2>
+                    <span class="refresh-text"><i class="fas fa-sync"></i> Updated 2 hours ago</span>
+                </div>
+                <div class="insights-container">
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Sleep Pattern Correlation</h4>
+                            <p>Mining team members working night shifts show 23% lower recovery scores. Consider adjusting rotation schedules.</p>
+                        </div>
+                        <button class="btn-icon"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Temperature Impact</h4>
+                            <p>Employees working in high-temperature environments show elevated heart rates and decreased HRV. Consider additional cooling breaks.</p>
+                        </div>
+                        <button class="btn-icon"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Stress Prediction</h4>
+                            <p>Algorithm predicts 8 employees may experience high stress levels next week based on declining recovery patterns.</p>
+                        </div>
+                        <button class="btn-icon"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
